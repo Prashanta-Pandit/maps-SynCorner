@@ -9,7 +9,7 @@ const SearchResult = () => {
                 <div className="relative w-full">
                     <select
                         id="fuel-type"
-                        className="w-full p-4 text-sm text-gray-950 bg-neutral-100"
+                        className="w-full p-4 text-sm text-gray-950 bg-neutral-100 focus:outline-none"
                     >
                         <option value="">Choose fuel type</option>
                         <option value="E10">E10</option>
