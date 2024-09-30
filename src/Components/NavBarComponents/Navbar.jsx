@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { AlignJustify } from 'lucide-react';
-import Map from '../ContentComponents/Map';
+import { AlignJustify, Map } from 'lucide-react';
+import Maps from '../ContentComponents/Map';
 
 export default function Navbar() {
   const [showMap, setShowMap] = useState(true); // Initial state is true to show Map
@@ -21,11 +21,11 @@ export default function Navbar() {
       <nav
         className={`${
           isExpanded ? 'w-44' : 'w-12'
-        } h-screen p-4 flex flex-col items-start fixed top-0 left-0 transition-[width] duration-500 ease-in-out`}           
+        } h-screen p-4 flex flex-col items-start fixed top-0 left-0 transition-[width] duration-500 ease-in-out shadow-lg`}           
         onClick={toggleNav} // Toggle navbar size// Smooth transition for width
       >
         <h1
-          className={`text-neutral-700 font-extrabold text-2xl ${
+          className={`text-neutral-700 font-bold text-2xl ${
             isExpanded ? 'block' : 'hidden'
           }`} // Show the title only when expanded
         >
@@ -42,19 +42,19 @@ export default function Navbar() {
 
         {/* Map button only visible on medium and larger screens */}
         <button
-          className={`text-neutral-600 font-semibold mt-4 ${
+          className={`flex flex-row text-neutral-600 font-semibold mt-4 justify-between space-x-4 hover:bg-neutral-200 p-2 pr-16 rounded-lg ${
             isExpanded ? 'block' : 'hidden'
           }`} // Show Map button only when expanded
-         // onClick={toggleMap}
-          aria-label="Toggle Map"
+          // onClick={toggleMap}
         >
-          Map
+          <Map />
+          <span>Map</span>
         </button>
       </nav>
 
       {/* Main content container */}
       <div className={`${isExpanded ? 'ml-44' : 'ml-12'} w-full h-screen transition-all duration-500 ease-in-out`}>
-        {showMap && <Map />}
+        {showMap && <Maps />}
       </div>
     </div>
   );
