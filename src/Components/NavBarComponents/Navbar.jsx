@@ -21,7 +21,7 @@ export default function Navbar() {
       <nav
         className={`${
           isExpanded ? 'w-44' : 'w-14'
-        } h-screen p-4 flex flex-col items-start fixed top-0 left-0 transition-[width] duration-500 ease-in-out shadow-lg`}           
+        } h-screen p-4 flex flex-col items-start fixed top-0 left-0 transition-[width] duration-500 ease-in-out shadow-2xl`}           
         onClick={toggleNav} // Toggle navbar size// Smooth transition for width
       >
         <h1

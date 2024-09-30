@@ -3,18 +3,20 @@ import SearchResult from './SearchResult';
 
 const Map = () => {
     return (
-        <div className='bg-gray-100 h-screen w-screen flex items-center justify-center'>
-            <div className=' flex flex-col items-start fixed top-0 left-0 ml-52 mt-10'>
-               <SearchResult />
+        <div className='bg-gray-100 h-screen w-screen flex items-center justify-center relative'>
+            <div className='absolute top-5 left-5 lg:left-16'>
+                <SearchResult />
             </div>
-            <img
-                src='/img/maps.png'
-                width="100%"
-                height="100%"
-                alt="logo"
-            />
+            <div className="w-full h-full overflow-hidden">
+                <img
+                    src='/img/maps.png'
+                    className='w-full h-full object-cover'
+                    alt="Map"
+                />
+            </div>
         </div>
     );
 };
 
 export default Map;
+
