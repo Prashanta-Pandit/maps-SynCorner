@@ -20,7 +20,7 @@ export default function Navbar() {
       {/* Vertical Navbar with dynamic width */}
       <nav
         className={`${
-          isExpanded ? 'w-44' : 'w-12'
+          isExpanded ? 'w-44' : 'w-14'
         } h-screen p-4 flex flex-col items-start fixed top-0 left-0 transition-[width] duration-500 ease-in-out shadow-lg`}           
         onClick={toggleNav} // Toggle navbar size// Smooth transition for width
       >
@@ -53,7 +53,7 @@ export default function Navbar() {
       </nav>
 
       {/* Main content container */}
-      <div className={`${isExpanded ? 'ml-44' : 'ml-12'} w-full h-screen transition-all duration-500 ease-in-out`}>
+      <div className={`${isExpanded ? 'ml-44' : 'ml-14'} w-full h-screen transition-all duration-500 ease-in-out`}>
         {showMap && <Maps />}
       </div>
     </div>

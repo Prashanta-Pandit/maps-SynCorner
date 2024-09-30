@@ -7,7 +7,12 @@ const Map = () => {
             <div className=' flex flex-col items-start fixed top-0 left-0 ml-52 mt-10'>
                <SearchResult />
             </div>
-            <p className='text-black text-xl'>We will be adding map soon. Stay tuned !</p>
+            <img
+                src='/img/maps.png'
+                width="100%"
+                height="100%"
+                alt="logo"
+            />
         </div>
     );
 };
