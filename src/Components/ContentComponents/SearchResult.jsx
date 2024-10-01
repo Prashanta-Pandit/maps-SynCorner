@@ -17,7 +17,7 @@ const SearchResult = ({ children }) => {
 
     return (
         <>
-            <form className="my-6 max-w-lg mx-auto hidden md:block" onSubmit={handleSubmit}>
+            <form className="absolute z-10 top-16 left-2/3 my-6 max-w-lg mx-auto hidden md:block shadow-2xl" onSubmit={handleSubmit}>
                 <div className="flex flex-col md:flex-row border border-black rounded-lg overflow-hidden">
                     {/* Dropdown menu */}
                     <div className="relative w-full md:w-1/2">
@@ -55,7 +55,7 @@ const SearchResult = ({ children }) => {
 
             {/* On smaller screens, show a fixed button at the bottom-right corner */}
             <button
-                className="absolute z-10 top-16 right-8 p-2 bg-black text-white rounded-xl shadow-lg hover:bg-neutral-600 md:hidden"
+                className="absolute z-10 top-16 right-8 p-2 bg-black text-white rounded-xl hover:bg-neutral-600 md:hidden shadow-2xl"
                 >
                 <div className="flex flex-row items-center space-x-2">
                     <span>Search</span>
