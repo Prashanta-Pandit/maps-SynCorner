@@ -16,13 +16,13 @@ export default function Navbar() {
   };
 
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       {/* Vertical Navbar with dynamic width */}
       <nav
         className={`${
           isExpanded ? 'w-44' : 'w-14'
-        } h-screen p-4 flex flex-col items-start fixed top-0 left-0 transition-[width] duration-500 ease-in-out shadow-2xl`}           
-        onClick={toggleNav} // Toggle navbar size// Smooth transition for width
+        } h-screen p-4 flex flex-col items-start fixed top-0 left-0 transition-[width] duration-500 ease-in-out shadow-2xl`}
+        onClick={toggleNav} // Toggle navbar size
       >
         <h1
           className={`text-neutral-700 font-bold text-2xl ${
@@ -45,7 +45,6 @@ export default function Navbar() {
           className={`flex flex-row text-neutral-600 font-semibold mt-4 justify-between space-x-4 hover:bg-neutral-200 p-2 pr-16 rounded-lg ${
             isExpanded ? 'block' : 'hidden'
           }`} // Show Map button only when expanded
-          // onClick={toggleMap}
         >
           <Map />
           <span>Map</span>
@@ -53,12 +52,13 @@ export default function Navbar() {
       </nav>
 
       {/* Main content container */}
-      <div className={`${isExpanded ? 'ml-44' : 'ml-14'} w-full h-screen transition-all duration-500 ease-in-out`}>
+      <div className={`${isExpanded ? 'ml-44' : 'ml-14'} w-full h-screen overflow-hidden transition-all duration-500 ease-in-out`}>
         {showMap && <Maps />}
       </div>
     </div>
   );
 }
+
 
 
 
