@@ -6,13 +6,15 @@ const SearchResultContext = createContext();
 const SearchResult = ({ children }) => {
     // Set the default value to "E10"
     const [selectedFuelType, SetSelectedFuelType] = useState('E10');
-    const [searchSuburb, setSearchSuburb] = useState('');
+    const [searchCity, setSearchCity] = useState('');
+    const [searchItem, setSearchItem] = useState([]);
 
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add your submit logic here
+        // lets make the suburb only a result for now. 
+        setSearchItem(searchCity);
     }
 
     return (
@@ -39,8 +41,8 @@ const SearchResult = ({ children }) => {
                     <input
                         type="search"
                         className="p-3 w-full text-sm text-gray-950 bg-white border-l-0 focus:outline-none"
-                        placeholder="Your Suburb"
-                        onChange={(e) => setSearchSuburb(e.target.value)}
+                        placeholder="Your City"
+                        onChange={(e) => setSearchCity(e.target.value)}
                         required
                     />
                     <button
@@ -63,7 +65,7 @@ const SearchResult = ({ children }) => {
                 </div>
             </button>
 
-            <SearchResultContext.Provider value={{ selectedFuelType, searchSuburb }}>
+            <SearchResultContext.Provider value={{ selectedFuelType, searchCity, searchItem }}>
                 {children}
             </SearchResultContext.Provider>
         </>
