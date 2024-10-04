@@ -8,44 +8,50 @@ const mapContainerStyle = {
 };
 
 const Map = () => {
-    const { selectedFuelType, searchCity, searchItem } = useContext(SearchResultContext);
+    const { searchItem } = useContext(SearchResultContext);
+    const [center, setCenter] = useState({ lat: -35.2835, lng: 149.1281 }); // Default coordinates (Canberra)
 
-    const [center, setCenter] = useState({ lat: -35.2835, lng: 149.1281, }); // Syd cordinates by default. 
-
-    const GeocodeAPI = 'AIzaSyDKzvjuPXE0uUFkhYcWHthMbsQoPE4JaL4';
+    const GeocodeAPI = 'AIzaSyDKzvjuPXE0uUFkhYcWHthMbsQoPE4JaL4'; 
 
     useEffect(() => {
-        const fetchCordinates = async (suburb) => {
-            const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${suburb}&key=${GeocodeAPI}`);
-            const data = await response.json();
-    
-            if (data.results.length > 0) {
-                const location = data.results[0].geometry.location;
-                setCenter({
-                    lat: location.lat,
-                    lng: location.lng,
-                });
-                console.log(`The coordinates for ${searchItem} are: ${location.lat} & ${location.lng}`);
+        const fetchCoordinates = async (city, suburb) => {
+            try {
+                const address = `${suburb}, ${city}`; // Constructing the address
+                const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${GeocodeAPI}`);
+                const data = await response.json();
+        
+                if (data.results.length > 0) {
+                    const location = data.results[0].geometry.location;
+                    setCenter({
+                        lat: location.lat,
+                        lng: location.lng,
+                    });
+                    console.log(`The coordinates for ${suburb} are: ${location.lat} & ${location.lng}`);
+                } else {
+                    console.error('No results found for the suburb');
+                }
+            } catch (error) {
+                console.error('Error fetching coordinates:', error);
             }
         };
     
-        if (searchItem) {
-            fetchCordinates(searchItem);
+        if (searchItem.length > 0) { // Ensure searchItem has values
+            const [city, suburb] = searchItem; // Destructure searchItem
+            fetchCoordinates(city, suburb); // Pass city and suburb separately
         }
-    }, [searchItem]);
-    
-    
+    }, [searchItem, GeocodeAPI]); // Add GeocodeAPI to dependencies if it changes
+
     return (
         <div className='bg-gray-100 h-screen w-screen flex items-center justify-center relative'>
             {/* Main container for Google Map */}
             <div className="w-full h-full relative">
-                <LoadScript googleMapsApiKey="AIzaSyDKzvjuPXE0uUFkhYcWHthMbsQoPE4JaL4">
+                <LoadScript googleMapsApiKey={GeocodeAPI}>
                     <GoogleMap
                         mapContainerStyle={mapContainerStyle}
                         center={center}
                         zoom={15}
                     >
-                        {/* Add markers or other Google Maps components here */}
+                        {/* You can add markers or other map components here */}
                     </GoogleMap>
                 </LoadScript>
             </div>
@@ -54,6 +60,8 @@ const Map = () => {
 };
 
 export default Map;
+
+
 
 
 
