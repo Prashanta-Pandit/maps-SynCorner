@@ -6,16 +6,15 @@ const SearchResultContext = createContext();
 const SearchResult = ({ children }) => {
     // Set the default value to "E10"
     const [selectedFuelType, setSelectedFuelType] = useState('E10');
-    const [searchCity, setSearchCity] = useState('');
     const [searchSuburb, setSearchSuburb] = useState('');
     const [searchItem, setSearchItem] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // Make the suburb only a result for now.
-        const newSearchItem = [searchCity, searchSuburb];
+        const newSearchItem = [selectedFuelType, searchSuburb];
         setSearchItem(newSearchItem);
-        console.log(`The Searched Item is ${newSearchItem[0]}, ${newSearchItem[1]}`);
+        console.log(`The search item is: ${newSearchItem[0]}, ${newSearchItem[1]}`);
     }
 
     return (
@@ -37,15 +36,7 @@ const SearchResult = ({ children }) => {
                         </select>
                     </div>
 
-                    {/* Search input with button */}
                     <div className="relative w-full md:w-1/2 flex items-stretch mt-4 md:mt-0">
-                        <input
-                            type="text" // Changed from search_city to text
-                            className="p-3 w-full text-sm text-gray-950 bg-white border-l-0 focus:outline-none"
-                            placeholder="Your City"
-                            onChange={(e) => setSearchCity(e.target.value)}
-                            required
-                        />
                         <input
                             type="text" // Changed from search_suburb to text
                             className="p-3 w-full text-sm text-gray-950 bg-white border-l-0 focus:outline-none"
@@ -65,10 +56,9 @@ const SearchResult = ({ children }) => {
 
             {/* On smaller screens, show a fixed button at the bottom-right corner */}
             <button
-                className="absolute z-10 top-16 right-8 p-2 bg-black text-white rounded-xl hover:bg-neutral-600 md:hidden shadow-2xl"
+                className="absolute z-10 top-16 right-1 p-2 bg-black text-white rounded-xl hover:bg-neutral-600 md:hidden shadow-2xl"
             >
                 <div className="flex flex-row items-center space-x-2">
-                    <span>Search</span>
                     <Search className="h-5 w-5" />
                 </div>
             </button>

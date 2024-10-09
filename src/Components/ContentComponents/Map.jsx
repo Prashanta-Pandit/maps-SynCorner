@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { SearchResultContext } from './SearchResult';
 
@@ -7,17 +7,15 @@ const mapContainerStyle = {
     height: '100%',
 };
 
-const Map = () => {
+const Map = ({ setFormattedAddress }) => {
     const { searchItem } = useContext(SearchResultContext);
-    const [center, setCenter] = useState({ lat: -35.2835, lng: 149.1281 }); // Default coordinates (Canberra)
-
+    const [center, setCenter] = React.useState({ lat: -35.2835, lng: 149.1281 }); // Default coordinates (Canberra)
     const GeocodeAPI = 'AIzaSyDKzvjuPXE0uUFkhYcWHthMbsQoPE4JaL4'; 
 
     useEffect(() => {
-        const fetchCoordinates = async (city, suburb) => {
+        const fetchCoordinates = async (fuelType, suburb) => {
             try {
-                const address = `${suburb}, ${city}`; // Constructing the address
-                const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${GeocodeAPI}`);
+                const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?components=locality:${suburb}|country:AU&key=${GeocodeAPI}`);
                 const data = await response.json();
         
                 if (data.results.length > 0) {
@@ -26,7 +24,9 @@ const Map = () => {
                         lat: location.lat,
                         lng: location.lng,
                     });
-                    console.log(`The coordinates for ${suburb} are: ${location.lat} & ${location.lng}`);
+                    const formattedAddress = data.results[0].formatted_address; // Get the formatted address
+                    setFormattedAddress(formattedAddress); // Pass it back to the Navbar
+                    console.log(`The coordinates for ${suburb} are: ${location.lat} & ${location.lng} & the formatted address is ${formattedAddress}`);
                 } else {
                     console.error('No results found for the suburb');
                 }
@@ -35,11 +35,11 @@ const Map = () => {
             }
         };
     
-        if (searchItem.length > 0) { // Ensure searchItem has values
-            const [city, suburb] = searchItem; // Destructure searchItem
-            fetchCoordinates(city, suburb); // Pass city and suburb separately
+        if (searchItem.length > 0) {
+            const [fuelType, suburb] = searchItem;
+            fetchCoordinates(fuelType, suburb); 
         }
-    }, [searchItem, GeocodeAPI]); // Add GeocodeAPI to dependencies if it changes
+    }, [searchItem]); 
 
     return (
         <div className='bg-gray-100 h-screen w-screen flex items-center justify-center relative'>
@@ -60,6 +60,8 @@ const Map = () => {
 };
 
 export default Map;
+
+
 
 
 
