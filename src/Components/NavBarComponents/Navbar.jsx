@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AlignJustify, Map, MapPinned } from 'lucide-react';
 import Maps from '../ContentComponents/Map';
+import Results from './Results';
 
 export default function Navbar() {
     const [showMap, setShowMap] = useState(true); // Initial state is true to show Map
@@ -55,19 +56,29 @@ export default function Navbar() {
 
                 {/* Display formatted address */}
                 {formattedAddress && (
+                    <>
                     <p
-                    className={`flex items-center justify-between space-x-4 text-neutral-600 mt-2 ${
-                        isExpanded ? 'block' : 'hidden'
-                    }`}
-                    >
-                    <span className="text-m font-semibold flex flex-col">
-                        Fuel stations available near
-                        <div className="flex flex-row justify-between">
-                            {formattedAddress}
-                        </div>
-                    </span>
+                        className={`flex items-center justify-between space-x-4 text-neutral-600 mt-2 ${
+                            isExpanded ? 'block' : 'hidden'
+                        }`}
+                        >
+                        <span className="text-m font-semibold flex flex-col">
+                            Fuel stations available near
+                            <div className="flex flex-row justify-between">
+                                {formattedAddress}
+                            </div>
+                        </span>
                     </p>
+                    </>
                 )}
+
+                {/* Display results */}
+                {
+                   <div className={` ${isExpanded ? 'block' : 'hidden'}`}>
+                        <Results />
+                   </div> 
+                }
+
             </nav>
 
             {/* Main content container */}
