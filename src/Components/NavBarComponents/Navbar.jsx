@@ -44,16 +44,6 @@ export default function Navbar() {
                     <AlignJustify />
                 </button>
 
-                {/* Map button only visible on medium and larger screens */}
-                <button
-                    className={`flex flex-row text-neutral-600 font-semibold mt-4 justify-between space-x-4 hover:bg-neutral-200 p-2 pr-16 rounded-lg ${
-                    isExpanded ? 'block' : 'hidden'
-                    }`} // Show Map button only when expanded
-                >
-                    <Map />
-                    <span>Map</span>
-                </button>
-
                 {/* Display formatted address */}
                 {formattedAddress && (
                     <>

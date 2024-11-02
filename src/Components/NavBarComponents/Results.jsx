@@ -34,7 +34,7 @@ const Results = () => {
       {storeData.map((rslt) => (
         <div key={rslt.storeId} >
           <div className="max-w-xs mx-auto space-y-4 p-4">
-        <div className="flex items-center space-x-3 bg-white p-4 rounded-lg shadow-md">
+        <div className="flex items-center space-x-3 bg-white p-4 rounded-lg shadow-md hover:cursor-pointer hover:bg-gray-100">
           <div className="w-6 h-6 bg-blue-600 text-white rounded-md flex items-center justify-center">
              <Fuel className="w-4 h-4" />
           </div>
