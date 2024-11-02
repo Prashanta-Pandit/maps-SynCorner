@@ -62,11 +62,8 @@ export default function Navbar() {
                             isExpanded ? 'block' : 'hidden'
                         }`}
                         >
-                        <span className="text-m font-semibold flex flex-col">
-                            Fuel stations available near
-                            <div className="flex flex-row justify-between">
-                                {formattedAddress}
-                            </div>
+                        <span className="text-sm font-semibold flex flex-col">
+                            Fuel stations available near {formattedAddress}
                         </span>
                     </p>
                     </>
