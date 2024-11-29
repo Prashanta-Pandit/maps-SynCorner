@@ -1,6 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import { SearchResultContext } from './SearchResult';
+import { SearchResultContextProvider } from './SearchResult';
+import FuelStationCard from './FuelStationCard';
 
 const mapContainerStyle = {
     width: '100%',
@@ -8,8 +9,8 @@ const mapContainerStyle = {
 };
 
 const Map = ({ setFormattedAddress }) => {
-    const { searchItem } = useContext(SearchResultContext);
-    const [center, setCenter] = React.useState({ lat: -35.2835, lng: 149.1281 }); // Default coordinates (Canberra)
+    const { searchItem } = useContext(SearchResultContextProvider);
+    const [center, setCenter] = useState({ lat: -35.2835, lng: 149.1281 }); // Default coordinates (Canberra)
     const GeocodeAPI = 'AIzaSyDKzvjuPXE0uUFkhYcWHthMbsQoPE4JaL4'; 
 
     useEffect(() => {
@@ -24,8 +25,8 @@ const Map = ({ setFormattedAddress }) => {
                         lat: location.lat,
                         lng: location.lng,
                     });
-                    const formattedAddress = data.results[0].formatted_address; // Get the formatted address
-                    setFormattedAddress(formattedAddress); // Pass it back to the Navbar
+                    const formattedAddress = data.results[0].formatted_address;
+                    setFormattedAddress(formattedAddress);
                     console.log(`The coordinates for ${suburb} are: ${location.lat} & ${location.lng} & the formatted address is ${formattedAddress}`);
                 } else {
                     console.error('No results found for the suburb');
@@ -37,12 +38,17 @@ const Map = ({ setFormattedAddress }) => {
     
         if (searchItem.length > 0) {
             const [fuelType, suburb] = searchItem;
-            fetchCoordinates(fuelType, suburb); 
+            fetchCoordinates(fuelType, suburb);
         }
     }, [searchItem]); 
 
     return (
-        <div className='bg-gray-100 h-screen w-screen flex items-center justify-center relative'>
+        <div className='bg-gray-100 h-screen w-screen relative'>
+            {/* Card container for IndividualResultDetails */}
+            <div className='absolute top-20 left-10 z-10 border border-black bg-white rounded-lg shadow-lg w-80'>
+               <FuelStationCard  /> { /*make sure this passes the fuel results.  */}
+            </div>
+
             {/* Main container for Google Map */}
             <div className="w-full h-full relative">
                 <LoadScript googleMapsApiKey={GeocodeAPI}>
@@ -60,6 +66,8 @@ const Map = ({ setFormattedAddress }) => {
 };
 
 export default Map;
+
+
 
 
 

@@ -1,7 +1,7 @@
 import React, { useState, createContext } from 'react';
 import { Search } from 'lucide-react';
 
-const SearchResultContext = createContext();
+const SearchResultContextProvider  = createContext();
 
 const SearchResult = ({ children }) => {
     // Set the default value to "E10"
@@ -63,15 +63,15 @@ const SearchResult = ({ children }) => {
                 </div>
             </button>
 
-            <SearchResultContext.Provider value={{ selectedFuelType, searchItem }}>
+            <SearchResultContextProvider.Provider value={{ selectedFuelType, searchItem }}>
                 {children}
-            </SearchResultContext.Provider>
+            </SearchResultContextProvider.Provider>
         </>
     );
 };
 
 export default SearchResult;
-export { SearchResultContext };
+export { SearchResultContextProvider  };
 
 
 

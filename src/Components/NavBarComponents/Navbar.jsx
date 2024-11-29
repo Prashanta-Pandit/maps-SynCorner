@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { AlignJustify, Map, MapPinned } from 'lucide-react';
+import { AlignJustify } from 'lucide-react';
 import Maps from '../ContentComponents/Map';
-import Results from './Results';
+import AvaliableFuelStation from './AvaliableFuelStation';
 
 export default function Navbar() {
     const [showMap, setShowMap] = useState(true); // Initial state is true to show Map
@@ -62,7 +62,7 @@ export default function Navbar() {
                 {/* Display results */}
                 {
                    <div className={` ${isExpanded ? 'block' : 'hidden'}`}>
-                        <Results />
+                        <AvaliableFuelStation />
                    </div> 
                 }
 
