@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { SearchResultContextProvider } from './SearchResult';
-import FuelStationCard from './FuelStationCard';
 
 const mapContainerStyle = {
     width: '100%',
@@ -44,10 +43,6 @@ const Map = ({ setFormattedAddress }) => {
 
     return (
         <div className='bg-gray-100 h-screen w-screen relative'>
-            {/* Card container for IndividualResultDetails */}
-            <div className='absolute top-20 left-10 z-10 border border-black bg-white rounded-lg shadow-lg w-80'>
-               <FuelStationCard  /> { /*make sure this passes the fuel results.  */}
-            </div>
 
             {/* Main container for Google Map */}
             <div className="w-full h-full relative">

@@ -1,11 +1,8 @@
 import React, { useContext } from 'react';
-import { selectedFuelStationContextProvider }  from '../NavBarComponents/AvaliableFuelStation';
 import { Phone, Fuel } from 'lucide-react';
 
 
-const FuelStationCard = () => {
-
-    const {storeName, fuelType, storeAddress, fuelPrice, storePhoneNumber} = useContext(selectedFuelStationContextProvider);
+const FuelStationCard = ({storeName, storeAddress, fuelPrice, storePhoneNumber, fuelType}) => {
 
     
     return (
@@ -16,7 +13,7 @@ const FuelStationCard = () => {
             </h5>
             <div className=" bg-yellow-100 flex items-center mt-2 space-x-2">
                 <Fuel className='w-4 h-4' aria-label="Phone Icon" />
-                <p className="text-gray-700 text-sm">{fuelType} · ${fuelPrice}/l</p>
+                <p className="text-gray-700 text-sm">{fuelType} · {fuelPrice}/l</p>
             </div>
             <div className="flex items-center mt-2 space-x-2">
                 <Phone className='w-4 h-4' aria-label="Phone Icon" />
@@ -33,6 +30,6 @@ const FuelStationCard = () => {
             </div> 
         </div>
     )
-}
+};
 
 export default FuelStationCard;

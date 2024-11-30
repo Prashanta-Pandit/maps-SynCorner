@@ -1,10 +1,9 @@
-import React, { useContext, useState, createContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { ResultsContextProvider } from './ResultsContextProvider';
 import { Fuel } from 'lucide-react';
 
-const selectedFuelStationContextProvider = createContext();
 
-const AvaliableFuelStation = ( {children}) => {
+const AvaliableFuelStation = () => {
    
     const [isClicked, setIsClicked] = useState(false);
     const { storeData } = useContext(ResultsContextProvider);
@@ -23,7 +22,7 @@ const AvaliableFuelStation = ( {children}) => {
 
     return (
         <>
-              <div className="max-w-md space-y-4 mt-10 max-h-96 overflow-y-scroll scrollbar-visible">
+            <div className="max-w-md space-y-4 mt-10 max-h-96 overflow-y-scroll scrollbar-visible">
 
                 {/* Show avalaible fuel stations */}
 
@@ -53,12 +52,9 @@ const AvaliableFuelStation = ( {children}) => {
                 </div>
                 ))}
             </div>
-            <selectedFuelStationContextProvider.Provider value ={{ storeName, storeAddress, fuelPrice, storePhoneNumber }}>
-                {children}
-            </selectedFuelStationContextProvider.Provider>
+            
         </>
     )
 };
 
 export default AvaliableFuelStation;
-export { selectedFuelStationContextProvider };
